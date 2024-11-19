@@ -11,10 +11,10 @@ export const config = {
     origin: process.env.CORS_ORIGIN || "http://localhost:3000",
   },
   db: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DB_URL,
   },
   jwt: {
     secret: process.env.JWT_SECRET || "default-secret-key",
     expiresIn: process.env.JWT_EXPIRES_IN || "24h",
   },
-} as const;
+};
