@@ -5,3 +5,11 @@
 - python
 - FastAPI
 - SQLAlchemy
+
+## Project structure
+
+## Run locally
+
+```bash
+uvicorn main:app --reload
+```
