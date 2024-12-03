@@ -9,7 +9,7 @@ from database import engine, get_db
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Tracking API")
+app = FastAPI(title="Unlimited.Dashboard Backend")
 
 # CORS 設置
 app.add_middleware(
