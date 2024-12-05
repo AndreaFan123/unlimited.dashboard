@@ -11,5 +11,6 @@
 ## Run locally
 
 ```bash
-uvicorn main:app --reload
+# IF you are in the backend directory, run the following command to start the server
+uvicorn app.main:app --reload
 ```
