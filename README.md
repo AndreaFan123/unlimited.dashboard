@@ -6,20 +6,20 @@
 
 #### Project Setup
 
-- [ ] Initialize Node.js + Express.js project
-- [ ] Configure TypeScript
-- [ ] Setup SQLite + Prisma
-- [ ] Setup project structure (routes, controllers, services)
-- [ ] Configure environment variables
+- [x] Initialize Node.js + Express.js project
+- [x] Configure TypeScript
+- [x] Setup SQLite + Prisma
+- [x] Setup project structure (routes, controllers, services)
+- [x] Configure environment variables
 
 #### Database Structure
 
 #### Database Design
 
-- [ ] Create Events table
-- [ ] Create Users table
-- [ ] Create Sessions table
-- [ ] Setup Prisma migrations
+- [x] Create Events table
+- [x] Create Users table
+- [x] Create Sessions table
+- [x] Setup Prisma migrations
 
 #### Security Setup
 
