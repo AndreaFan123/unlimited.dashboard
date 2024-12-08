@@ -2,12 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
+import { configSecurity } from "./middleware/security";
 import { routes } from "./routes/index";
 import { errorHandler } from "./middleware/errorHandler";
 
 dotenv.config();
 
 const app = express();
+configSecurity(app);
 const port = process.env.PORT || 3000;
 
 // middleware
@@ -26,8 +28,10 @@ app.get("/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port} 🔥`);
-});
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port} 🔥`);
+  });
+}
 
 export default app;

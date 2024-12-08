@@ -1,5 +1,22 @@
 # unlimited.dashboard
 
+## Tech Stacks
+
+### Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- Prisma
+- SQLite
+
+### Frontend
+
+- React
+- Next.js
+- TypeScript
+- Tailwind CSS
+
 ## Infrastructure Phase
 
 ### Backend Foundation
@@ -23,11 +40,11 @@
 
 #### Security Setup
 
-- [ ] Basic Security
-- [ ] Configure CORS
-- [ ] Implement rate limiting
-- [ ] Setup API error handling middleware
-- [ ] Setup request validation middleware
+- [x] Basic Security
+- [x] Configure CORS
+- [x] Implement rate limiting
+- [x] Setup API error handling middleware
+- [x] Setup request validation middleware
 
 ### Core Features Phase
 
