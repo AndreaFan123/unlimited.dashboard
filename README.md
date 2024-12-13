@@ -60,8 +60,8 @@
 
 #### User Authentication
 
-- [ ] Set up admin account
-- [ ] Implement JWT authentication
+- [x] Set up admin account
+- [x] Implement JWT authentication
 - [ ] Create visitor account mechanism
 - [ ] Implement login/logout functionality
 - [ ] Create permission middleware
