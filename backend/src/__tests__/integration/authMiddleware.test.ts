@@ -51,4 +51,23 @@ describe("Auth middleware", () => {
       expect(mockRequest.user?.email).toBe("test@example.com");
     });
   });
+
+  describe("require role", () => {
+    it("should allow access for correct role", () => {
+      mockRequest.user = {
+        userId: "1",
+        email: "test@example.com",
+        role: "admin",
+      };
+
+      const middleware = requireRole(["admin"]);
+      middleware(
+        mockRequest as Request,
+        mockResponse as Response,
+        nextFunction
+      );
+
+      expect(nextFunction).toHaveBeenCalled();
+    });
+  });
 });
