@@ -15,8 +15,8 @@ describe("Auth middleware", () => {
   beforeEach(() => {
     mockRequest = { headers: {} };
     mockResponse = {
-      status: jest.fn().mockReturnThis(), // Ensure status returns the mockResponse
-      json: jest.fn().mockReturnThis(), // Ensure json returns the mockResponse
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn().mockReturnThis(),
       send: jest.fn().mockReturnThis(),
     } as any as Response;
 

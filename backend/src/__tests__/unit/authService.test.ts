@@ -14,19 +14,17 @@ describe("AuthService", () => {
     it("should register a new user successfully", async () => {
       const result = await authService.register(
         "test@test.com",
-        "hashedPassword",
-        "visitor"
+        "hashedPassword"
       );
       expect(result.user).toBeDefined();
       expect(result.user.email).toBe("test@test.com");
-      expect(result.user.role).toBe("visitor");
       expect(result.token).toBeDefined();
     });
 
     it("should throw an error if email is exists", async () => {
-      await authService.register("test@test.com", "hashedPassword", "visitor");
+      await authService.register("test@test.com", "hashedPassword");
       await expect(
-        authService.register("test@test.com", "hashedPassword", "visitor")
+        authService.register("test@test.com", "hashedPassword")
       ).rejects.toThrow("Email already registered");
     });
   });
