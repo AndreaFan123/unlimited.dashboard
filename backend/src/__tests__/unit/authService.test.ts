@@ -14,26 +14,24 @@ describe("AuthService", () => {
     it("should register a new user successfully", async () => {
       const result = await authService.register(
         "test@test.com",
-        "hashedPassword",
-        "visitor"
+        "hashedPassword"
       );
       expect(result.user).toBeDefined();
       expect(result.user.email).toBe("test@test.com");
-      expect(result.user.role).toBe("visitor");
       expect(result.token).toBeDefined();
     });
 
     it("should throw an error if email is exists", async () => {
-      await authService.register("test@test.com", "hashedPassword", "visitor");
+      await authService.register("test@test.com", "hashedPassword");
       await expect(
-        authService.register("test@test.com", "hashedPassword", "visitor")
+        authService.register("test@test.com", "hashedPassword")
       ).rejects.toThrow("Email already registered");
     });
   });
 
   describe("login", () => {
     it("should login successfully with correct credentials", async () => {
-      await authService.register("test@test.com", "Password123", "visitor");
+      await authService.register("test@test.com", "Password123");
       const result = await authService.login("test@test.com", "Password123");
       expect(result.user).toBeDefined();
       expect(result.user.email).toBe("test@test.com");
@@ -41,7 +39,7 @@ describe("AuthService", () => {
     });
 
     it("should throw error with incorrect password", async () => {
-      await authService.register("test@test.com", "Password123", "visitor");
+      await authService.register("test@test.com", "Password123");
       await expect(
         authService.login("test@test.com", "123123")
       ).rejects.toThrow("Invalid Password");
