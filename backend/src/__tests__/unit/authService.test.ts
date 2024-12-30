@@ -31,7 +31,7 @@ describe("AuthService", () => {
 
   describe("login", () => {
     it("should login successfully with correct credentials", async () => {
-      await authService.register("test@test.com", "Password123", "visitor");
+      await authService.register("test@test.com", "Password123");
       const result = await authService.login("test@test.com", "Password123");
       expect(result.user).toBeDefined();
       expect(result.user.email).toBe("test@test.com");
@@ -39,7 +39,7 @@ describe("AuthService", () => {
     });
 
     it("should throw error with incorrect password", async () => {
-      await authService.register("test@test.com", "Password123", "visitor");
+      await authService.register("test@test.com", "Password123");
       await expect(
         authService.login("test@test.com", "123123")
       ).rejects.toThrow("Invalid Password");

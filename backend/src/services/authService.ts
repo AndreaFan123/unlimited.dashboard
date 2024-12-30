@@ -13,7 +13,7 @@ export class AuthService {
       throw new Error("Email already registered");
     }
     // Determine user role based on admin whitelist
-    const adminEmails = process.env.ADMIN_EMAIL;
+    const adminEmails = process.env.ADMIN_EMAIL?.split(",") || [];
     const role = adminEmails?.includes(email) ? "admin" : "visitor";
 
     // If user is not existed, then hashed password and create new user
@@ -34,7 +34,6 @@ export class AuthService {
     if (!user) {
       throw new Error("user not found");
     }
-    // If user existed, verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
       throw new Error("Invalid Password");
