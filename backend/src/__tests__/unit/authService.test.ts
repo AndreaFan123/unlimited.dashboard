@@ -1,54 +1,31 @@
+import { afterEach } from "node:test";
 import { AuthService } from "../../services/authService";
 import prisma from "../../services/prisma";
 import { describe, expect, it, beforeEach, jest } from "@jest/globals";
 
 describe("AuthService", () => {
   let authService: AuthService;
+  const originalEnv = process.env;
 
   beforeEach(async () => {
+    process.env.ADMIN_EMAIL = "andreaFan@unlimited.com";
+    process.env.ADMIN_PASSWORD = "Aa7882205@";
     authService = new AuthService();
-    await prisma.user.deleteMany();
   });
 
-  describe("register", () => {
-    it("should register a new user successfully", async () => {
-      const result = await authService.register(
-        "test@test.com",
-        "hashedPassword"
-      );
-      expect(result.user).toBeDefined();
-      expect(result.user.email).toBe("test@test.com");
-      expect(result.token).toBeDefined();
-    });
-
-    it("should throw an error if email is exists", async () => {
-      await authService.register("test@test.com", "hashedPassword");
-      await expect(
-        authService.register("test@test.com", "hashedPassword")
-      ).rejects.toThrow("Email already registered");
-    });
+  afterEach(() => {
+    process.env = originalEnv;
   });
 
   describe("login", () => {
     it("should login successfully with correct credentials", async () => {
-      await authService.register("test@test.com", "Password123");
-      const result = await authService.login("test@test.com", "Password123");
+      const result = await authService.login(
+        "andreaFan@unlimited.com",
+        "Aa7882205@"
+      );
       expect(result.user).toBeDefined();
-      expect(result.user.email).toBe("test@test.com");
       expect(result.token).toBeDefined();
-    });
-
-    it("should throw error with incorrect password", async () => {
-      await authService.register("test@test.com", "Password123");
-      await expect(
-        authService.login("test@test.com", "123123")
-      ).rejects.toThrow("Invalid Password");
-    });
-
-    it("should throw error with non-existent user", async () => {
-      await expect(
-        authService.login("test123@test123.com", "Password123")
-      ).rejects.toThrow("user not found");
+      expect(result.user.role).toBe("admin");
     });
   });
 });

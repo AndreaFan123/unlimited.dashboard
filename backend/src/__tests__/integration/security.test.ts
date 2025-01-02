@@ -1,8 +1,9 @@
 import request from "supertest";
-import app from "../../server";
+import { createServer } from "../../server";
 import { describe, expect, it } from "@jest/globals";
 
 describe("Security Middleware", () => {
+  const app = createServer();
   it("should have security headers", async () => {
     const response = await request(app).get("/health");
     expect(response.headers).toHaveProperty("x-frame-options");

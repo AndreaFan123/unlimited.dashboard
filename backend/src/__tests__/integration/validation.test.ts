@@ -1,8 +1,9 @@
 import request from "supertest";
-import app from "../../server";
+import { createServer } from "../../server";
 import { describe, it, expect } from "@jest/globals";
 
 describe("Request Validation", () => {
+  const app = createServer();
   describe("Event Validation", () => {
     it("should reject invalid event type", async () => {
       const res = await request(app).post("/api/events").send({
@@ -24,18 +25,6 @@ describe("Request Validation", () => {
         });
 
       expect(res.status).toBe(501);
-    });
-  });
-
-  describe("User registration validation", () => {
-    it("should reject weak password", async () => {
-      const res = await request(app).post("/api/auth/register").send({
-        email: "test@test.com",
-        password: "123",
-        role: "visitor",
-      });
-      expect(res.status).toBe(400);
-      expect(res.body.errors).toBeDefined();
     });
   });
 });

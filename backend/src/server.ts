@@ -6,32 +6,33 @@ import { configSecurity } from "./middleware/security";
 import { routes } from "./routes/index";
 import { errorHandler } from "./middleware/errorHandler";
 
-dotenv.config();
+export function createServer() {
+  dotenv.config();
+  const app = express();
 
-const app = express();
-configSecurity(app);
-const port = process.env.PORT || 3000;
+  configSecurity(app);
 
-// middleware
-app.use(helmet());
-app.use(cors());
-app.use(express.json());
+  app.use(helmet());
+  app.use(cors());
+  app.use(express.json());
 
-// Routes
-app.use("/api", routes);
+  app.use("/api", routes);
 
-// Error handling
-app.use(errorHandler);
+  app.use(errorHandler);
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
+  app.get("/health", (req, res) => {
+    res.status(200).json({
+      status: "Ok",
+    });
+  });
+
+  return app;
+}
 
 if (process.env.NODE_ENV !== "test") {
+  const app = createServer();
+  const port = process.env.PORT || 3000;
   app.listen(port, () => {
     console.log(`Server is running on port ${port} 🔥`);
   });
 }
-
-export default app;
